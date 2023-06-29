@@ -43,10 +43,27 @@ class actividadesController extends Controller
     {
         try {
             $activities = actividadesModel::where('id_usuario', +$request->id_usuario)->select()
-                ->leftJoin('mng_tiempos', 'mng_tiempos.id_actividad', '=', 'mng_actividades.id_actividad')
-                ->orderBy('mng_actividades.descripcion')
+                ->orderBy('mng_actividades.id_actividad')
                 ->get();
+            foreach ($activities as $key => $value) {
+                $value->tiempos = $this->getTimesByActivities($value->id_actividad);
+            }
             return response()->json(['status' => 1, 'data' => $activities]);
+        } catch (\Throwable $th) {
+            if ($th->getMessage() !== null) {
+                return response()->json(['status' => 0, 'message' => $th->getMessage() . " en la línea " . $th->getLine()]);
+            } else {
+                return response()->json(['status' => 0, 'message' => $th]);
+            }
+        }
+    }
+
+    public function getTimesByActivities($id)
+    {
+        try {
+            $times = tiempoActividadesModel::where('id_actividad', +$id)
+                ->get();
+            return $times;
         } catch (\Throwable $th) {
             if ($th->getMessage() !== null) {
                 return response()->json(['status' => 0, 'message' => $th->getMessage() . " en la línea " . $th->getLine()]);
