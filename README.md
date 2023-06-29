@@ -6,7 +6,7 @@ El query se encuentra en la raìz del back como `QueryBD.SQL`, MySQL.
 
 # Clonar repositorio
 
-git clone https://github.com/julianstt8/manageActiviesBack.git
+git clone https://github.com/julianstt8/back_manageActivities.git
 
 # Versiones usadas en el proyecto
 
