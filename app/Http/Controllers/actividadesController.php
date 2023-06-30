@@ -42,7 +42,8 @@ class actividadesController extends Controller
     public function getActivities(Request $request)
     {
         try {
-            $activities = actividadesModel::where('id_usuario', +$request->id_usuario)->select()
+            $activities = actividadesModel::where('id_usuario', +$request->id_usuario)
+                ->select()
                 ->orderBy('mng_actividades.id_actividad')
                 ->get();
             foreach ($activities as $key => $value) {

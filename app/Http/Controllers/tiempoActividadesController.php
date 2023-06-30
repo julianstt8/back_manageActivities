@@ -45,7 +45,8 @@ class tiempoActividadesController extends Controller
     public function delete(Request $request)
     {
         try {
-            $res = tiempoActividadesModel::where('id_actividad', $request->id)->delete();
+            $res = tiempoActividadesModel::where('id_actividad', $request->id)
+                ->delete();
             return response()->json(['status' => 1, 'message' => $res]);
         } catch (\Throwable $th) {
             if ($th->getMessage() !== null) {
@@ -60,7 +61,8 @@ class tiempoActividadesController extends Controller
     public function getActivities(Request $request)
     {
         try {
-            $activities = tiempoActividadesModel::where('id_usuarios', $request->id)->get();
+            $activities = tiempoActividadesModel::where('id_usuarios', $request->id)
+                ->get();
             return response()->json(['status' => 1, 'message' => $activities]);
         } catch (\Throwable $th) {
             if ($th->getMessage() !== null) {
